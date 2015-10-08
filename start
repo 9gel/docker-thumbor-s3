@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+envtpl < /etc/thumbor.conf.tpl > /etc/thumbor.conf
+thumbor
