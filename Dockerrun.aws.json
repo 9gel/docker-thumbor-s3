@@ -1,0 +1,90 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "nginx-proxy-conf",
+      "host": {
+        "sourcePath": "/var/app/current/nginx"
+      }
+    }  
+  ],
+  "containerDefinitions": [
+    {
+      "name": "thumbor1",
+      "image": "9gel/thumbor-s3",
+      "essential": true,
+      "environment": [
+        { "name": "AWS_ACCESS_KEY_ID", "value": "your-aws-access-key-id" },
+        { "name": "AWS_SECRET_ACCESS_KEY", "value": "your-secret-access-key" },
+        { "name": "AWS_S3_BUCKET", "value": "your-s3-bucket" },
+        { "name": "THUMBOR_KEY", "value": "your-thumbor-key" }
+      ],
+      "memory": 64
+    },
+    {
+      "name": "thumbor2",
+      "image": "9gel/thumbor-s3",
+      "essential": true,
+      "environment": [
+        { "name": "AWS_ACCESS_KEY_ID", "value": "your-aws-access-key-id" },
+        { "name": "AWS_SECRET_ACCESS_KEY", "value": "your-secret-access-key" },
+        { "name": "AWS_S3_BUCKET", "value": "your-s3-bucket" },
+        { "name": "THUMBOR_KEY", "value": "your-thumbor-key" }
+      ],
+      "memory": 64
+    },
+    {
+      "name": "thumbor3",
+      "image": "9gel/thumbor-s3",
+      "essential": true,
+      "environment": [
+        { "name": "AWS_ACCESS_KEY_ID", "value": "your-aws-access-key-id" },
+        { "name": "AWS_SECRET_ACCESS_KEY", "value": "your-secret-access-key" },
+        { "name": "AWS_S3_BUCKET", "value": "your-s3-bucket" },
+        { "name": "THUMBOR_KEY", "value": "your-thumbor-key" }
+      ],
+      "memory": 64
+    },
+    {
+      "name": "thumbor4",
+      "image": "9gel/thumbor-s3",
+      "essential": true,
+      "environment": [
+        { "name": "AWS_ACCESS_KEY_ID", "value": "your-aws-access-key-id" },
+        { "name": "AWS_SECRET_ACCESS_KEY", "value": "your-secret-access-key" },
+        { "name": "AWS_S3_BUCKET", "value": "your-s3-bucket" },
+        { "name": "THUMBOR_KEY", "value": "your-thumbor-key" }
+      ],
+      "memory": 64
+    },
+    {
+      "name": "nginx-proxy",
+      "image": "nginx",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": [
+        "thumbor1",
+        "thumbor2",
+        "thumbor3",
+        "thumbor4"
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "nginx-proxy-conf",
+          "containerPath": "/etc/nginx/conf.d",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "awseb-logs-nginx-proxy",
+          "containerPath": "/var/log/nginx"
+        }
+      ]
+    }
+  ]
+}

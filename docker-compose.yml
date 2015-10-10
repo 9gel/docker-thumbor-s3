@@ -1,0 +1,24 @@
+nginx:
+  image: nginx:latest
+  restart: always
+  links:
+    - thumbor1
+    - thumbor2
+  ports:
+    - "8880:80"
+  volumes:
+    - ./nginx/:/etc/nginx/conf.d/:ro
+
+thumbor1:
+  image: 9gel/thumbor-s3:latest
+  restart: always
+  expose:
+    - 8888
+  env_file: ./thumbor.env
+
+thumbor2:
+  image: 9gel/thumbor-s3:latest
+  restart: always
+  expose:
+    - 8888
+  env_file: ./thumbor.env
