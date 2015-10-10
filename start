@@ -1,5 +1,9 @@
 #!/bin/bash
 
 set -e
+
+# update config
 envtpl < /etc/thumbor.conf.tpl > /etc/thumbor.conf
-thumbor
+
+# run
+exec thumbor
