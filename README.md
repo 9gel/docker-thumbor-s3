@@ -14,10 +14,12 @@ Running It
 ----------
 
 - Prepare an environment file such as `thumbor.env` with the following content:
-    AWS_ACCESS_KEY_ID=<your AWS access key ID>
-    AWS_SECRET_ACCESS_KEY=<your AWS secret access key>
-    AWS_S3_BUCKET=<your s3 bucket>
-    THUMBOR_KEY=<your Thumbor key>
+````
+AWS_ACCESS_KEY_ID=<your AWS access key ID>
+AWS_SECRET_ACCESS_KEY=<your AWS secret access key>
+AWS_S3_BUCKET=<your s3 bucket>
+THUMBOR_KEY=<your Thumbor key>
+````
 - `docker run --name thumbor -p "8888:8888" --env-file=thumbor.env 9gel/thumbor-s3`
 - Get a URL for a file `yourfile.png`:
   - `docker exec thumbor thumbor-url -k '<your Thumbor key>' -w 400 -e 400 "yourfile.png"`
