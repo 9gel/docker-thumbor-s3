@@ -49,8 +49,14 @@ Here's an example using Docker Compose with files in this repository:
 
 Easily deploy to [Amazon Elastic Beanstalk](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecs.html) in a Multicontainer Docker Environment and take advantage of their auto-scaling feature. You can also put a CDN in front of your setup with [CloudFront](https://aws.amazon.com/cloudfront/).
 
-- Edit `Dockerrun.aws.json` in this repository.
 - Follow this [Elastic Beanstalk tutorial](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html), using the `Dockerrun.aws.json` in this repository.
+- Define these Environment Properties in Elastic Beanstalk Configuration -> Software Configuration
+````
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_S3_BUCKET
+THUMBOR_KEY
+````
 
 How It Works
 ------------
